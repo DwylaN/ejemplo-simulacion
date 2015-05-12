@@ -1,0 +1,49 @@
+-- phpMyAdmin SQL Dump
+-- version 4.4.3
+-- http://www.phpmyadmin.net
+--
+-- Servidor: localhost
+-- Tiempo de generación: 12-05-2015 a las 18:39:00
+-- Versión del servidor: 5.6.24
+-- Versión de PHP: 5.6.8
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Base de datos: `simulacion`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `products`
+--
+
+CREATE TABLE IF NOT EXISTS `products` (
+  `id` int(10) unsigned NOT NULL,
+  `code` text NOT NULL,
+  `name` text NOT NULL,
+  `description` text NOT NULL,
+  `price` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
