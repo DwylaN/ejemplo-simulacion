@@ -22,12 +22,16 @@
 							$messages = array("message"=>"No se encontraron productos.");
 							break;
 						case 1:
-							$messages = array("message"=>"Campos incompletos");
+							$messages = array("message"=>"Campos incompletos.");
 							break;
 						case 2:
-							$messages = array("message"=>"Producto no encontrado");
+							$messages = array("message"=>"Producto no encontrado.");
 							break;
 						case 3:
+							$messages = array("message"=>"Producto existente.");
+							break;
+						case 4:
+							$messages = array("message"=>"Producto agregado exitosamente.");
 							break;
 					}
 				break;

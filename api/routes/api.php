@@ -31,4 +31,42 @@
 		}
 	});
 
+	$app->post('/products/',function() use($app){
+		$code = $app->request->post("code");
+		$name = $app->request->post("name");
+		$description = $app->request->post("description");
+		$price = $app->request->post("price");
+
+		try{
+			$connection = getConnection();
+			$dbh = $connection->prepare("SELECT * FROM products WHERE code = ?");
+			$dbh->bindParam(1, $code);
+			$dbh->execute();
+			$products = $dbh->fetchAll(PDO::FETCH_OBJ);
+			$connection = null;
+
+			if(count($products) > 0){
+				$app->response->status(200);
+				$app->response->body(json_encode(getMessage('products',3)));
+			}else{
+				$connection = getConnection();
+				$dbh = $connection->prepare("INSERT INTO products VALUES(null, ?, ?, ?, ?)");
+				$dbh->bindParam(1, $code);
+				$dbh->bindParam(2, $name);
+				$dbh->bindParam(3, $description);
+				$dbh->bindParam(4, $price);
+				$dbh->execute();
+				$connection = null;
+
+				$app->response->status(200);
+				$app->response->body(json_encode(getMessage('products',4)));
+			}
+		}
+		catch(PDOException $e){
+			echo "Error:".$e->getMessage();
+			$app->response->status(200);
+			$app->response->body(json_encode(getMessage('general',0)));
+		}
+	});
+
 ?>
