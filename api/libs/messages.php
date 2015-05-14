@@ -34,13 +34,17 @@
 							$messages = array("message"=>"Producto agregado exitosamente.");
 							break;
 						case 5:
-                            $messages = array("message"=>"Producto Eliminado");
+                            $messages = array("message"=>"Producto eliminado.");
                             break;
                         case 6:
-                            $messages = array("message"=>"No se pudo eliminar hubo un problema");
+                            $messages = array("message"=>"No se pudo eliminar hubo un problema.");
                             break;
                         case 7:
-                            $messages = array("message"=>"No existe el producto para eliminar");
+                            $messages = array("message"=>"No existe el producto para eliminar.");
+                            break;
+                        case 8:
+                       	    $messages = array("message"=>"Producto actualizado exitosamente.");
+                       	    break;
                     
 					}
 				break;
