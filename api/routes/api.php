@@ -45,7 +45,7 @@
 		//evalua si la consulta retorno datos
 		if(count($products) > 0){		
 			$app->response->status(200);		
-			$app->response->body(json_encode($products));
+			$app->response->body(json_encode($products[0]));
 		}else{			
 			$app->response->status(200);			
 			$app->response->body(json_encode(getMessage('products',2)));
