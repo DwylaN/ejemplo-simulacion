@@ -26,7 +26,7 @@ function carga_tabla() {
             <td>' + data[i].description + '</td> \
             <td> $' + data[i].price + '</td> \
             <td> \
-            <button id="btn_editar" onclick="update_producto(\''+ data[i].code+'\')" type="button" class="btn btn-success btn-sm" > \
+            <button id="btn_editar" onclick="detalle_producto(\''+ data[i].code+'\')" type="button" class="btn btn-success btn-sm" > \
             <span class="glyphicon glyphicon-pencil"></span> \
             </button> \
             <button id="btn_eliminar" onclick="eliminar_producto(\''+ data[i].code+'\')"  type="button" class="btn btn-danger btn-sm"> \
@@ -67,14 +67,18 @@ function eliminar_producto(code) {
 }
 
 function detalle_producto(code) {
-    
     $.ajax({
         url: 'http://compras.ipn/api/products/' + code,
         type: 'GET',
         dataType: 'json',        
     })
-    .done(function() {
-        console.log("success");
+    .done(function(data) {        
+        console.log(data);
+
+        //Jesus
+
+        $('#modal_productos').modal('show');
+
     });
     
 }
