@@ -123,4 +123,48 @@
         $connection = null;
     });
 
+	//Elimina un producto de la db apartir de su codigo
+    $app->put('/products/:id', function($id) use ($app) {
+
+    	$code = $app->request->put("code");
+		$name = $app->request->put("name");
+		$description = $app->request->put("description");
+		$price = $app->request->put("price");
+
+  		//Conecta a la db
+    	$connection = getConnection();
+		
+		
+		$dbh = $connection->prepare("SELECT * FROM products WHERE code = ?");
+		$dbh->bindParam(1, $code);
+		$dbh->execute();
+		$products = $dbh->fetchAll(PDO::FETCH_OBJ);
+
+		if(count($products) > 0){						
+			try{
+				$dbh = $connection->prepare("UPDATE products SET code = ?, name = ?, description = ?, price =? WHERE id =?");
+				$dbh->bindParam(1, $code);
+				$dbh->bindParam(2, $name);
+				$dbh->bindParam(3, $description);
+				$dbh->bindParam(4, $price);
+				$dbh->bindParam(5, $id);
+				$dbh->execute();
+
+				$app->response->status(200);
+				$app->response->body(json_encode(getMessage('products',8)));
+			} catch(PDOException $e){
+				echo "Error:".$e->getMessage();
+				$app->response->status(200);
+				$app->response->body(json_encode(getMessage('general',0)));
+			}
+			
+		}else{
+			$app->response->status(200);
+			$app->response->body(json_encode(getMessage('products',2)));
+		}
+
+        //Limpiamos la conexion a la db
+        $connection = null;
+    });
+
 ?>
