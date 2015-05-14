@@ -29,8 +29,11 @@
 
     <div class="container-fluid">
         <div class="row">
-
             <div class="main">
+                <div id="mensajes" class="alert alert-info alert-dismissable " style="display:none;">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <p>mensaje</p>
+                </div>
                 <h1 class="page-header">Productos</h1>
                 <div class="row ">
                    <div class="text-right">

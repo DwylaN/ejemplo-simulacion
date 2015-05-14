@@ -15,7 +15,6 @@ function carga_tabla() {
         var table_body = '';
         //limpiamos el la lista
         $('#cuerpo_tabla_productos').html('');
-       
         //Iniciamos la creacion de la lista de productos
         for (var i = 0 ; i <  data.length; i++) {
             //concatenamos el html de cada renglon de la tabla
@@ -58,6 +57,7 @@ function eliminar_producto(code) {
         .done(function(data) {
             console.log(data.message);
             carga_tabla();
+            muestra_mensaje(data.message);
         })
         .fail(function() {
             console.log("error");
@@ -85,6 +85,16 @@ function detalle_producto(code) {
 function actualizar_producto() {}
 
 function guardar_producto() {}
+
+function muestra_mensaje(message) {
+    $("#mensajes p ").html('');
+    $("#mensajes p ").html(message);
+
+    $("#mensajes").fadeTo(2000, 500).slideUp(500, function(){
+        $("#mensajes").hide();
+        $("#mensajes p ").html('');
+    });
+}
 
 
 
