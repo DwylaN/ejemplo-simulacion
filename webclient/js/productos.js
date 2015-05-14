@@ -15,6 +15,7 @@ function carga_tabla() {
         var table_body = '';
         //limpiamos el la lista
         $('#cuerpo_tabla_productos').html('');
+        if (data.length > 0 ) {
         //Iniciamos la creacion de la lista de productos
         for (var i = 0 ; i <  data.length; i++) {
             //concatenamos el html de cada renglon de la tabla
@@ -34,12 +35,15 @@ function carga_tabla() {
             </td> \
             </tr>';
         };
+    }else{
+        muestra_mensaje('NO EXISTEN PRODUCTOS REGISTRADOS.');
+    }
         // Rellenamos el cuerpo de la lista de productos
         $('#cuerpo_tabla_productos').html(table_body);
     })
     .fail(function(data) {
         console.log("error");
-        alert('error en la carga de la lista')
+        muestra_mensaje('error en la carga de la lista');
     });
 }
 
@@ -61,7 +65,7 @@ function eliminar_producto(code) {
         })
         .fail(function() {
             console.log("error");
-            alert('error en la eliminacion del producto')
+            muestra_mensaje('error en la eliminacion del producto');
         });        
     };
 }
@@ -88,7 +92,7 @@ function guardar_producto() {}
 
 function muestra_mensaje(message) {
     $("#mensajes p ").html('');
-    $("#mensajes p ").html(message);
+    $("#mensajes p ").html('<center><strong>'+ message + '</strong></center>');
 
     $("#mensajes").fadeTo(2000, 500).slideUp(500, function(){
         $("#mensajes").hide();
