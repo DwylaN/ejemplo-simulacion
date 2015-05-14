@@ -31,6 +31,27 @@
 		}
 	});
 
+	//retorna un solo producto segun el codigo
+	$app->get('/products/:codigo',function($code) use ($app){
+		//obtiene la conexion de la base de datos
+		$connection = getConnection();
+		
+		$dbh = $connection->prepare("SELECT * FROM products WHERE code = ?");
+		$dbh->bindParam(1,$code);
+		$dbh->execute();
+		
+		$products = $dbh->fetchAll(PDO::FETCH_OBJ);
+		
+		//evalua si la consulta retorno datos
+		if(count($products) > 0){		
+			$app->response->status(200);		
+			$app->response->body(json_encode($products));
+		}else{			
+			$app->response->status(200);			
+			$app->response->body(json_encode(getMessage('products',2)));
+		}
+	});	
+
 	$app->post('/products/',function() use($app){
 		$code = $app->request->post("code");
 		$name = $app->request->post("name");
