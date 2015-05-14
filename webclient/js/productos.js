@@ -80,5 +80,11 @@ function detalle_producto(code) {
         $('#modal_productos').modal('show');
 
     });
-    
 }
+
+function actualizar_producto() {}
+
+function guardar_producto() {}
+
+
+
