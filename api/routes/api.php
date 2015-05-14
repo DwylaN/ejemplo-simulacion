@@ -69,4 +69,37 @@
 		}
 	});
 
+	//Elimina un producto de la db apartir de su codigo
+    $app->delete('/products/:codigo', function($code) use ($app) {
+  		//Conecta a la db
+    	$connection = getConnection();
+		
+		$dbh = $connection->prepare("SELECT * FROM products WHERE code = ?");
+		$dbh->bindParam(1, $code);
+		$dbh->execute();
+
+		$products = $dbh->fetchAll(PDO::FETCH_OBJ);
+		        
+        if(count($products) >0) {
+        
+            try {
+                $dbh = $connection->prepare("DELETE FROM products WHERE code = ?");
+                $dbh->bindParam(1, $code);
+                $dbh->execute();
+
+                $app->response->status(200);
+                $app->response->body(json_encode(getMessage('products',5)));
+        
+            } catch(PDOException $e) {
+            	$app->response->status(200);
+                $app->response->body(json_encode(getMessage('products',6)));
+            }
+        }else{
+        	$app->response->status(200);
+            $app->response->body(json_encode(getMessage('products',7)));
+        }        
+        //Limpiamos la conexion a la db
+        $connection = null;
+    });
+
 ?>
