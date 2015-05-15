@@ -1,13 +1,13 @@
 $(document).on('ready',function() {
     //Se carga la tabla
-    carga_tabla();    
+    carga_tabla();
 });
 
 //Funcion para consultar y crear una lista de productos existentes en la db
 function carga_tabla() {
     //Se realiza la peticion a la api de todos los productos existentes
     $.ajax({
-     url: 'http://compras.ipn/api/products',
+     url: 'http://localhost/ejemplo-simulacion/api/products',
      type: 'GET',
      dataType: 'json'
     })
@@ -43,7 +43,7 @@ function carga_tabla() {
     })
     .fail(function(data) {
         console.log("error");
-        muestra_mensaje('error en la carga de la lista');
+        muestra_mensaje('Error en la carga de la lista.');
     });
 }
 
@@ -54,7 +54,7 @@ function eliminar_producto(code) {
     if (confirm('Seguro que desea eliminar el producto con codigo: ' + code )) {
         //Si se confirmo la eliminacion se hace la peticion delete a la api
         $.ajax({
-            url: 'http://compras.ipn/api/products/' + code,
+            url: 'http://localhost/ejemplo-simulacion/api/products/' + code,
             type: 'DELETE',
             dataType: 'json',
         })
@@ -65,30 +65,77 @@ function eliminar_producto(code) {
         })
         .fail(function() {
             console.log("error");
-            muestra_mensaje('error en la eliminacion del producto');
+            muestra_mensaje('Error en la eliminacion del producto.');
         });        
     };
 }
 
 function detalle_producto(code) {
     $.ajax({
-        url: 'http://compras.ipn/api/products/' + code,
+        url: 'http://localhost/ejemplo-simulacion/api/products/' + code,
         type: 'GET',
         dataType: 'json',        
     })
     .done(function(data) {        
         console.log(data);
-
-        //Jesus
-
+        //se asignan valores
+        $("#code").val(data.code);
+        $("#name").val(data.name);
+        $("#price").val(data.price);
+        $("#description").val(data.description);
+        //se elimina evento click del boton
+        $("#btn-editar").unbind('click');
+        //se agrega envento click al boton
+        $("#btn-editar").click(function(){ actualizar_producto(data.id); });
+        //se muestra la ventana modal
         $('#modal_productos').modal('show');
-
     });
 }
 
-function actualizar_producto() {}
+function actualizar_producto(id) {
+    $.ajax({
+        url: 'http://localhost/ejemplo-simulacion/api/products/' + id,
+        type: 'PUT',
+        dataType: 'json',
+        data : $("#edit-form").serialize()
+    }).done(function(data){
+        $('#modal_productos').modal('hide');
+        console.log(data.message);
+        carga_tabla();
+        muestra_mensaje(data.message);
+    }).fail(function(){
+        console.log("error");
+        muestra_mensaje('No se pudo actualizar el producto.');
+    });
+}
 
-function guardar_producto() {}
+function guardar_producto() {
+    $("#code").val('');
+    $("#name").val('');
+    $("#price").val('');
+    $("#description").val('');
+    //se elimina evento click del boton
+    $("#btn-editar").unbind('click');
+    //se agrega envento click al boton
+    $("#btn-editar").click(function(){ agregar_producto() });
+}
+
+function agregar_producto(){
+    $.ajax({
+        url: 'http://localhost/ejemplo-simulacion/api/products/',
+        type: 'POST',
+        dataType: 'json',
+        data : $("#edit-form").serialize()
+    }).done(function(data){
+        $('#modal_productos').modal('hide');
+        console.log(data.message);
+        carga_tabla();
+        muestra_mensaje(data.message);
+    }).fail(function(){
+        console.log("error");
+        muestra_mensaje('No se pudo actualizar el producto.');
+    });
+}
 
 function muestra_mensaje(message) {
     $("#mensajes p ").html('');

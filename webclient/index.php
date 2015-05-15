@@ -13,8 +13,6 @@
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/jquery-2.1.3.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -37,7 +35,7 @@
                 <h1 class="page-header">Productos</h1>
                 <div class="row ">
                    <div class="text-right">
-                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal_productos">
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal_productos" onclick="guardar_producto();">
                         <span class="glyphicon glyphicon-plus"></span> Agregar
                     </button>
                 </div>
@@ -64,7 +62,7 @@
         </div>
     </div>
 </div>
-
+<!-- modals -->
 <div class="modal fade" id="modal_productos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -72,17 +70,30 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Producto</h4>
       </div>
-      <div class="modal-body">
-        ..
+      <div id="product-body" class="modal-body">
+        <form id="edit-form">
+            <label for="code">Codigo:</label>
+            <input type="text" id="code" name="code" value="" placeholder="001" required />
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" name="name" value="" placeholder="Mesa" required />
+            <label for="price">Precio:</label>
+            <input type="number" id="price" name="price" value="" placeholder="1000.50" min="0" step="0.01" required />
+            <label for="description">Descripción:</label>
+            <textarea id="description" name="description" required></textarea>
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary">Guardar</button>
+        <button type="button" id="btn-editar" class="btn btn-primary">Guardar</button>
       </div>
     </div>
   </div>
 </div>
 
+<!-- end modals -->
+
+<script src="js/jquery-2.1.3.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 <script src="js/productos.js"></script>
 </body>
 </html>

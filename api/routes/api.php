@@ -123,7 +123,7 @@
         $connection = null;
     });
 
-	//Elimina un producto de la db apartir de su codigo
+	//Actualiza un producto de la db apartir de su codigo
     $app->put('/products/:id', function($id) use ($app) {
 
     	$code = $app->request->put("code");
@@ -134,9 +134,8 @@
   		//Conecta a la db
     	$connection = getConnection();
 		
-		
-		$dbh = $connection->prepare("SELECT * FROM products WHERE code = ?");
-		$dbh->bindParam(1, $code);
+		$dbh = $connection->prepare("SELECT * FROM products WHERE id = ?");
+		$dbh->bindParam(1, $id);
 		$dbh->execute();
 		$products = $dbh->fetchAll(PDO::FETCH_OBJ);
 
