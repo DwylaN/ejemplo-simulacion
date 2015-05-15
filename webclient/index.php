@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,7 +13,6 @@
     <link href="css/dashboard.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
@@ -24,7 +22,6 @@
 
         </div>
     </nav>
-
     <div class="container-fluid">
         <div class="row">
             <div class="main">
@@ -40,7 +37,6 @@
                     </button>
                 </div>
             </div>
-
             <h4 class="sub-header">Listado</h4>
             <div class="table-responsive">
                 <table class="table table-striped">
@@ -72,14 +68,22 @@
       </div>
       <div id="product-body" class="modal-body">
         <form id="edit-form">
-            <label for="code">Codigo:</label>
-            <input type="text" id="code" name="code" value="" placeholder="001" required />
-            <label for="name">Nombre:</label>
-            <input type="text" id="name" name="name" value="" placeholder="Mesa" required />
-            <label for="price">Precio:</label>
-            <input type="number" id="price" name="price" value="" placeholder="1000.50" min="0" step="0.01" required />
-            <label for="description">Descripción:</label>
-            <textarea id="description" name="description" required></textarea>
+            <div class="form-group">
+                <label for="code" class="label-product">Codigo:</label>
+                <input type="text" class="form-control" id="code" name="code" value="" placeholder="001" required />
+            </div>
+            <div class="form-group">
+                <label for="name" class="label-product">Nombre:</label>
+                <input type="text" class="form-control" id="name" name="name" value="" placeholder="Mesa" required />
+            </div>
+            <div class="form-group">
+                <label for="price" class="label-product">Precio:</label>
+                <input type="number" class="form-control" id="price" name="price" value="" placeholder="1000.50" min="0" step="0.01" required />
+            </div>
+            <div class="form-group">
+                <label for="description" class="label-product">Descripción:</label>
+                <textarea id="description" class="form-control textarea-product" name="description" required></textarea>
+            </div>
         </form>
       </div>
       <div class="modal-footer">
@@ -89,7 +93,6 @@
     </div>
   </div>
 </div>
-
 <!-- end modals -->
 
 <script src="js/jquery-2.1.3.min.js"></script>

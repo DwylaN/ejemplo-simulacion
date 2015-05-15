@@ -1,4 +1,27 @@
+.textarea-product{
+	max-width: 100%;
+}
 
 .text-right { 
     text-align: right;
+}
+
+@media (min-width: 768px){
+	.modal-dialog {
+  		width: 500px;
+	}
+}
+
+@media (max-width: 767px){
+	.modal-dialog {
+		margin: 30px auto;
+		width: 75%;
+	}
+}
+
+@media (max-width: 500px){
+	.modal-dialog {
+		margin: 30px auto;
+		width: 350px;
+	}
 }
