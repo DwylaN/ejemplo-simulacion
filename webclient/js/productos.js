@@ -3,11 +3,14 @@ $(document).on('ready',function() {
     carga_tabla();
 });
 
+//dominio en donde se encuentra la api / Localhost,192.168.0.10,etc
+var URL_API = 'localhost';
+
 //Funcion para consultar y crear una lista de productos existentes en la db
 function carga_tabla() {
     //Se realiza la peticion a la api de todos los productos existentes
     $.ajax({
-     url: 'http://localhost/ejemplo-simulacion/api/products',
+     url: 'http://'+URL_API+'/ejemplo-simulacion/api/products',
      type: 'GET',
      dataType: 'json'
     })
@@ -54,7 +57,7 @@ function eliminar_producto(code) {
     if (confirm('Seguro que desea eliminar el producto con codigo: ' + code )) {
         //Si se confirmo la eliminacion se hace la peticion delete a la api
         $.ajax({
-            url: 'http://localhost/ejemplo-simulacion/api/products/' + code,
+            url: 'http://'+URL_API+'/ejemplo-simulacion/api/products/' + code,
             type: 'DELETE',
             dataType: 'json',
         })
@@ -72,7 +75,7 @@ function eliminar_producto(code) {
 
 function detalle_producto(code) {
     $.ajax({
-        url: 'http://localhost/ejemplo-simulacion/api/products/' + code,
+        url: 'http://'+URL_API+'/ejemplo-simulacion/api/products/' + code,
         type: 'GET',
         dataType: 'json',        
     })
@@ -94,7 +97,7 @@ function detalle_producto(code) {
 
 function actualizar_producto(id) {
     $.ajax({
-        url: 'http://localhost/ejemplo-simulacion/api/products/' + id,
+        url: 'http://'+URL_API+'/ejemplo-simulacion/api/products/' + id,
         type: 'PUT',
         dataType: 'json',
         data : $("#edit-form").serialize()
@@ -122,7 +125,7 @@ function guardar_producto() {
 
 function agregar_producto(){
     $.ajax({
-        url: 'http://localhost/ejemplo-simulacion/api/products/',
+        url: 'http://'+URL_API+'/ejemplo-simulacion/api/products/',
         type: 'POST',
         dataType: 'json',
         data : $("#edit-form").serialize()
