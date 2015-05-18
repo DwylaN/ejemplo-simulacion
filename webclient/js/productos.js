@@ -1,10 +1,10 @@
 $(document).on('ready',function() {
-    //Se carga la tabla
+    //Se rellena la tabla al terminar de cargar la pagina
     carga_tabla();
 });
 
 //dominio en donde se encuentra la api / Localhost,192.168.0.10,etc
-var URL_API = 'localhost';
+var URL_API = '10.200.57.11';
 
 //Funcion para consultar y crear una lista de productos existentes en la db
 function carga_tabla() {
@@ -73,6 +73,7 @@ function eliminar_producto(code) {
     };
 }
 
+//Funcion para obtener el detalle del producto
 function detalle_producto(code) {
     $.ajax({
         url: 'http://'+URL_API+'/ejemplo-simulacion/api/products/' + code,
@@ -95,6 +96,7 @@ function detalle_producto(code) {
     });
 }
 
+//Funcion para actualizar un producto segun su id
 function actualizar_producto(id) {
     $.ajax({
         url: 'http://'+URL_API+'/ejemplo-simulacion/api/products/' + id,
@@ -112,6 +114,7 @@ function actualizar_producto(id) {
     });
 }
 
+//Funcion para el boton de guardar
 function guardar_producto() {
     $("#code").val('');
     $("#name").val('');
@@ -123,6 +126,7 @@ function guardar_producto() {
     $("#btn-editar").click(function(){ agregar_producto() });
 }
 
+//Funcion para agregar un producto nuevo
 function agregar_producto(){
     $.ajax({
         url: 'http://'+URL_API+'/ejemplo-simulacion/api/products/',
@@ -140,6 +144,7 @@ function agregar_producto(){
     });
 }
 
+//Funcion para monstrar mensajes con estilo
 function muestra_mensaje(message) {
     $("#mensajes p ").html('');
     $("#mensajes p ").html('<center><strong>'+ message + '</strong></center>');

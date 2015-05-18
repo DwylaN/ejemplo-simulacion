@@ -52,6 +52,7 @@
 		}
 	});	
 
+	// Ruta para agreagar productos nuevos
 	$app->post('/products/',function() use($app){
 		$code = $app->request->post("code");
 		$name = $app->request->post("name");
@@ -59,6 +60,7 @@
 		$price = $app->request->post("price");
 
 		try{
+			// Se verifica que no exista el codigo nuevo
 			$connection = getConnection();
 			$dbh = $connection->prepare("SELECT * FROM products WHERE code = ?");
 			$dbh->bindParam(1, $code);
@@ -67,9 +69,11 @@
 			$connection = null;
 
 			if(count($products) > 0){
+				// mandamos respuesta y mensaje de que existe ya el codigo
 				$app->response->status(200);
 				$app->response->body(json_encode(getMessage('products',3)));
 			}else{
+				// Proceso de insercion
 				$connection = getConnection();
 				$dbh = $connection->prepare("INSERT INTO products VALUES(null, ?, ?, ?, ?)");
 				$dbh->bindParam(1, $code);
@@ -79,6 +83,7 @@
 				$dbh->execute();
 				$connection = null;
 
+				// respuesta y mensaje
 				$app->response->status(200);
 				$app->response->body(json_encode(getMessage('products',4)));
 			}
