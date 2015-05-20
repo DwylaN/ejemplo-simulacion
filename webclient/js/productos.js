@@ -4,7 +4,7 @@ $(document).on('ready',function() {
 });
 
 //dominio en donde se encuentra la api / Localhost,192.168.0.10,etc
-var URL_API = '10.200.57.11';
+var URL_API = 'localhost';
 
 //Funcion para consultar y crear una lista de productos existentes en la db
 function carga_tabla() {
